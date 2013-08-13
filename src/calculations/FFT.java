@@ -17,6 +17,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 package calculations;
 
+import java.awt.Color;
+
+import javax.swing.JFrame;
+
+import org.math.plot.Plot2DPanel;
+
+
 /**
  * A class that performs the Fast Fourier Transform.
  * @author Kaleb Kircher
@@ -155,6 +162,23 @@ public class FFT
 			phase[i] = Math.atan(temp);
 			// System.out.println(phase[i]);
 		}
+		
+		Plot2DPanel plot = new Plot2DPanel();
+		
+		plot.addLinePlot("Signal", new Color(255,68,68), signal);
+		plot.addLinePlot("Harmonic #1", new Color(51,181,229), REC[0]);
+		plot.addLinePlot("Harmonic #2", new Color(153,204,0), REC[1]);
+		plot.addLinePlot("Harmonic #3", new Color(255,187,51), REC[2]);
+		plot.addLinePlot("Harmonic #4", new Color(170,102,204), REC[3]);
+		
+		  // define the legend position
+        plot.addLegend("SOUTH");
+		
+		// put the PlotPanel in a JFrame like a JPanel
+        JFrame frame = new JFrame("FFT");
+        frame.setSize(600, 600);
+        frame.setContentPane(plot);
+        frame.setVisible(true);
 
 		// produce output
 		for (int i = 0; i < K; i++)
